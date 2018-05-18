@@ -33,7 +33,7 @@ class snmpcollector::install (
 		'json'
 	]
 
-  if $facts['ruby']['sitedir'] =~ /\/opt\/puppetlabs\\/ {
+  if $facts['ruby']['sitedir'] =~ /opt/ {
     $gem_provider = 'puppet_gem'
   } else {
     $gem_provider = 'gem'
