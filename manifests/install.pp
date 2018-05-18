@@ -33,6 +33,13 @@ class snmpcollector::install (
 		'json'
 	]
 
+  if $facts['ruby']['sitedir'] =~ /\/opt\/puppetlabs\\/ {
+    $gem_provider = 'puppet_gem'
+  } else {
+    $gem_provider = 'gem'
+  }
+
+
 	$package_name = "snmpcollector_${version}_amd64"
 
 	# Dependency for Package install
@@ -43,7 +50,7 @@ class snmpcollector::install (
 	# Gem requirements
 	package { $puppet_gems:
     	ensure   => 'installed',
-    	provider => 'puppet_gem',
+    	provider => $gem_provider,
   	} ->
 
 	# Pull down the required version deb and install.
