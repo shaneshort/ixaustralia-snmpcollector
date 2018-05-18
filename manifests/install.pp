@@ -3,7 +3,7 @@ class snmpcollector::install (
 )
 {
 
-	$packages = [
+	$_packages = [
 		'build-essential',
 		'bison',
 		'openssl',
@@ -23,9 +23,9 @@ class snmpcollector::install (
 
 
   if $facts['os']['distro']['codename'] == 'bionic' {
-		$packages = concat($packages, ['libreadline7', 'libreadline7-dev'])
+		$packages = concat($_packages, ['libreadline7', 'libreadline7-dev'])
 	} else {
-		$packages = concat($packages, ['libreadline6', 'libreadline6-dev'])
+		$packages = concat($_packages, ['libreadline6', 'libreadline6-dev'])
 	}
 
 	$puppet_gems = [
