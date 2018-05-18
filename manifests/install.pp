@@ -7,13 +7,11 @@ class snmpcollector::install (
 		'build-essential',
 		'bison',
 		'openssl',
-		'libreadline6',
-		'libreadline6-dev',
 		'curl',
 		'git-core',
-		'zlib1g', 
-		'zlib1g-dev', 
-		'libssl-dev', 
+		'zlib1g',
+		'zlib1g-dev',
+		'libssl-dev',
 		'libyaml-dev',
 		'libxml2-dev',
 		'autoconf',
@@ -22,6 +20,13 @@ class snmpcollector::install (
 		'automake',
 		'libtool'
 	]
+
+
+  if $facts['os']['distro']['codename'] == 'bionic' {
+		$packages = concat($packages, ['libreadline7', 'libreadline7-dev'])
+	} else {
+		$packages = concat($packages, ['libreadline6', 'libreadline6-dev'])
+	}
 
 	$puppet_gems = [
 		'rest-client',
@@ -40,7 +45,7 @@ class snmpcollector::install (
     	ensure   => 'installed',
     	provider => 'puppet_gem',
   	} ->
-	
+
 	# Pull down the required version deb and install.
 	snmpcollector::remote_package { $package_name :
 		url => "http://snmpcollector-rel.s3.amazonaws.com/builds/snmpcollector_${version}_amd64.deb",
