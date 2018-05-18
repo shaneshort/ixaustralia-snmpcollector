@@ -8,7 +8,6 @@ class snmpcollector::install (
 		'bison',
 		'openssl',
 		'curl',
-		'git-core',
 		'zlib1g',
 		'zlib1g-dev',
 		'libssl-dev',
@@ -16,16 +15,15 @@ class snmpcollector::install (
 		'libxml2-dev',
 		'autoconf',
 		'libc6-dev',
-		'ncurses-dev',
 		'automake',
 		'libtool'
 	]
 
 
   if $facts['os']['distro']['codename'] == 'bionic' {
-		$packages = concat($_packages, ['libreadline7', 'libreadline-dev'])
+		$packages = concat($_packages, ['libreadline7', 'libreadline-dev', 'git', 'libncurses5-dev'])
 	} else {
-		$packages = concat($_packages, ['libreadline6', 'libreadline6-dev'])
+		$packages = concat($_packages, ['libreadline6', 'libreadline6-dev', 'ncurses-dev', 'git-core'])
 	}
 
 	$puppet_gems = [
