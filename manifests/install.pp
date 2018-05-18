@@ -23,7 +23,7 @@ class snmpcollector::install (
 
 
   if $facts['os']['distro']['codename'] == 'bionic' {
-		$packages = concat($_packages, ['libreadline7', 'libreadline7-dev'])
+		$packages = concat($_packages, ['libreadline7', 'libreadline-dev'])
 	} else {
 		$packages = concat($_packages, ['libreadline6', 'libreadline6-dev'])
 	}
